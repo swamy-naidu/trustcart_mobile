@@ -1,0 +1,249 @@
+{%  load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+  </head>
+  <body>
+  <table align="center" border="0">
+     <tr>
+             <th colspan="5">
+
+                <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+    <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+    <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+        <a href="{% url 'view_one_mobile' %}?modelno=SM-M215FZBDINS"> <img src="{% static 'images/offer_car1.jpg' %}" class="d-block w-100" alt="..."></a>
+    </div>
+    <div class="carousel-item">
+        <a href="{% url 'view_one_mobile' %}?modelno=MZB83010IN"><img src="{% static 'images/offer_car2.jpg' %}" class="d-block w-100" alt="..."></a>
+    </div>
+    <div class="carousel-item">
+        <a href="{% url 'view_one_mobile' %}?modelno=GM1911"><img src="{% static 'images/offer_car3.jpg' %}" class="d-block w-100" alt="..."></a>
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+
+             </th>
+         </tr>
+      <tr>
+          <td colspan="5">
+          <table style="margin-bottom: 20px;margin-top: 20px" align="center" border="0">
+              <tr>
+          <td>
+              <a href="{% url 'view_one_tv' %}?modelno=55CAUHDN"><img src="{% static 'images/nokia_led_tv.png' %}" height="200" width="330" ></a>
+          </td>
+          <td>
+              <a href="{% url 'view_all_tvs' %}?brand=MI"><img src="{% static 'images/mi_led_tvs.png' %}" height="200" width="330" ></a>
+          </td>
+          <td>
+              <a href="{% url 'view_all_tvs' %}?brand=Sony"><img src="{% static 'images/sony_led_tvs.png' %}" height="200" width="330"></a>
+          </td>
+              </tr>
+          </table>
+          </td>
+      </tr>
+
+         <tr>
+             <th colspan="5">
+                 <h3  style="text-align: center;font-family:Roboto;">Top Mobile offers</h3>
+             </th>
+         </tr>
+         <tr align="center">
+             <th>
+                 <div class="card" style="width: 10rem;">
+  <div class="card-body">
+      <table align="center" border="0">
+          <tr align="center">
+              <th>
+            <a href="{% url 'view_one_mobile' %}?modelno=MWC32HN/A"><img src="{% static 'images/iphone-11-pro-max-64.jpeg' %}" width="70" height="100"></a>
+              </th>
+          </tr>
+          <tr align="center">
+              <th style="text-align: center">
+                  <h6 >Apple iPhone 11 Pro </h6>
+              </th>
+          </tr>
+          <tr align="center">
+              <th style="text-align: center">
+                  <h6 style="color: green">Flat ₹4,000 Off</h6>
+              </th>
+          </tr>
+          <tr align="center">
+              <th style="text-align: center">
+                  <h6>From ₹94,500</h6>
+              </th>
+          </tr>
+      </table>
+  </div>
+</div>
+    </th>
+              <th >
+                 <div class="card" style="width: 10rem;">
+  <div class="card-body">
+    <table align="center" border="0">
+          <tr align="center">
+              <th>
+                  <a href="{% url 'view_one_mobile' %}?modelno=SM-N975FZSDINS" ><img src="{% static 'images/samsung_galaxy_note_10.jpeg' %}" width="60" height="100"></a>
+              </th>
+          </tr>
+          <tr align="center">
+              <th style="text-align: center">
+                  <h6 ></h6>
+                  <h6 >Samsung Note 10 Plus </h6>
+              </th>
+          </tr>
+          <tr align="center">
+              <th style="text-align: center">
+                  <h6 style="color: green">Flat ₹5,000 Off</h6>
+              </th>
+          </tr>
+          <tr align="center">
+              <th style="text-align: center">
+                  <h6 >From ₹79,999</h6>
+              </th>
+          </tr>
+      </table>
+
+  </div>
+</div>
+    </th>
+              <th>
+                 <div class="card" style="width: 10rem;">
+  <div class="card-body">
+   <table align="center" border="0">
+          <tr align="center">
+              <th>
+                 <a href="{% url 'view_one_mobile' %}?modelno=HD1901" > <img src="{% static 'images/oneplus_7t.jpeg' %}" width="60" height="100">
+                 </a>
+              </th>
+          </tr>
+          <tr align="center">
+              <th style="text-align: center">
+                  <h6 ></h6>
+                  <h6 >OnePlus 7T</h6>
+              </th>
+          </tr>
+          <tr align="center">
+              <th style="text-align: center">
+                  <h6 style="color: green">Flat ₹3,000 Off</h6>
+              </th>
+          </tr>
+          <tr align="center">
+              <th style="text-align: center">
+                  <h6 >From ₹38,990</h6>
+              </th>
+          </tr>
+      </table>
+  </div>
+</div>
+    </th>
+              <th>
+                 <div class="card" style="width: 10rem;">
+  <div class="card-body">
+    <table align="center" border="0">
+          <tr align="center ">
+              <th>
+                  <a href="{% url 'view_one_mobile' %}?modelno=SM-G988BZAPINU"><img src="{% static 'images/samsung-galaxy-s20-.jpeg' %}" width="60" height="100">
+                  </a>
+              </th>
+          </tr>
+          <tr align="center">
+              <th style="text-align: center">
+                  <h6 ></h6>
+                  <h6 >Samsung S20 Ultra</h6>
+              </th>
+          </tr>
+          <tr align="center">
+              <th style="text-align: center">
+                  <h6  style="color: green">Flat ₹4,000 Off</h6>
+              </th>
+          </tr>
+          <tr align="center">
+              <th style="text-align: center">
+                  <h6 >From ₹92,999</h6>
+              </th>
+          </tr>
+      </table>
+  </div>
+</div>
+    </th>
+
+             <th>
+                 <div class="card" style="width: 10rem;">
+  <div class="card-body">
+    <table align="center" border="0">
+          <tr align="center ">
+              <th>
+                  <a href="{% url 'view_one_mobile' %}?modelno=MZB8309IN"><img src="{% static 'images/mi-note_8_pro.jpeg' %}" width="60" height="100">
+                  </a>
+              </th>
+          </tr>
+          <tr align="center">
+              <th style="text-align: center">
+                  <h6 ></h6>
+                  <h6 >Redmi Note 8 Pro</h6>
+              </th>
+          </tr>
+          <tr align="center">
+              <th style="text-align: center">
+                  <h6  style="color: green">Flat ₹1,000 Off</h6>
+              </th>
+          </tr>
+          <tr align="center">
+              <th style="text-align: center">
+                  <h6 >From ₹16,990</h6>
+              </th>
+          </tr>
+      </table>
+  </div>
+</div>
+    </th>
+         </tr>
+
+<tr>
+          <td colspan="5">
+          <table style="margin-bottom: 20px;margin-top: 20px" align="center">
+              <tr>
+          <td>
+              <a href="{% url 'view_all_tvs' %}?brand=Motorola"> <img src="{% static 'images/motorola_led_tvs.png' %}" height="200" width="330" ></a>
+          </td>
+          <td>
+              <a href="{% url 'view_all_tvs' %}?brand=Samsung"> <img src="{% static 'images/samsung_led_tvs.png' %}" height="200" width="330" ></a>
+          </td>
+          <td>
+              <a href="{% url 'view_all_tvs' %}?brand=VU"> <img src="{% static 'images/vu_led_tvs.png' %}" height="200" width="330" ></a>
+          </td>
+              </tr>
+          </table>
+          </td>
+      </tr>
+
+  </table>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  </body>
+</html>

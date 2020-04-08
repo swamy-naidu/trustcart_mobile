@@ -1,0 +1,567 @@
+{% extends 'login_head.html' %}
+{% load static %}
+{% block lghead %}
+      <script type="text/javascript">
+          function check() {
+              var p = document.getElementById("pin").value;
+              var request = new XMLHttpRequest();
+    request.open("GET","http://127.0.0.1:8000/pin?pin="+p,true);
+    request.onreadystatechange = innerfun;
+    request.send();
+
+    function innerfun()
+    {
+        if(request.status == 200 && request.readyState == 4)
+        {
+            var x = request.responseText;
+            var data = JSON.parse(x); // converting text(str) to json
+
+            if(data.message != "")
+            {
+               document.getElementById("dt").innerText = data.message;
+            }
+        }
+    }
+          }
+      </script>
+
+    <table align="center" border="0">
+
+        <tr align="center">
+            <td>
+
+                <div class="card" style="width: 60rem;">
+                <div class="card-body">
+                    <table align="center" border="0">
+                        <tr>
+                            <td width="500" style="text-align: center" >
+                                <img src="{{ data.photo.url }}" ><br><br>
+                                <form action="{% url 'Save' %}" method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="idno" value="{{ user.idno }}">
+                                    <input type="hidden" name="name" value="{{ user.name }}">
+                                    <input type="hidden" name="modelno" value="{{ data.model_no_id }}">
+                                    <input type="hidden" name="category" value="Laptops">
+                                    {% if cart %}
+                                        <button type="submit" class="btns btn1" name="b1" value="add_to_cart" disabled>ADDED TO CART</button>
+                                        {% else %}
+                                        <button type="submit" class="btns btn1" name="b1" value="add_to_cart">ADD TO CART</button>
+                                    {% endif %}
+                                {% if q == 0 %}
+                                <button type="submit" class="btns btn4" name="b1" value="buy_now" disabled>Out of Stock</button>
+                                {% else %}
+                                    <button type="submit" class="btns btn3" name="b1" value="buy_now">BUY NOW</button>
+                                {% endif %}
+                                 </form>
+                                {% if mess %}
+                                    {{ mess }}
+                                {% endif %}
+                            </td>
+                            <td width="800" rowspan="4">
+                                <table align="center" border="0">
+                                    <tr>
+                                        <td colspan="2" width="800" style="height: 90px;">
+                                            <h5>{{ data.tittle }}</h5>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="110">
+                                            <h4>₹{{ data.price }}</h4>
+                                        </td>
+                                        <td><a href="#"> <img src="{% static 'images/info.png' %}" style="margin-bottom: 5px"> </a> </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td colspan="2">
+                                            <h6> Available Offers</h6>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td colspan="2">
+                                            <img src="{% static 'images/offer.png' %}" width="18" height="18">  <b>Bank Offer </b> 5% Unlimited Cashback on Flipkart Axis Bank Credit Card <a href="{% url 'terms_conditions' %}"> <b>T&C</b> </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <img src="{% static 'images/offer.png' %}" width="18" height="18">  <b>Bank Offer </b> Flat ₹50/- Cashback as Flipkart gift voucher for first-time RuPay Debit Card Transactions <a href="{% url 'terms_conditions' %}"> <b>T&C</b> </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <img src="{% static 'images/offer.png' %}" width="18" height="18">  <b>Bank Offer </b> Extra 5% off* with Axis Bank Buzz Credit Card <a href="{% url 'terms_conditions' %}"> <b>T&C</b></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <img src="{% static 'images/offer.png' %}" width="18" height="18">  <b>Bank Offer </b> ₹6000 off on Prepaid Transactions with HDFC Credit and Debit Cards <a href="{% url 'terms_conditions' %}"> <b>T&C</b></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <a href="#"> <b>View more offers</b> </a>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td style="text-align: center;height: 50px">
+                                            {% if data.brand == 'Asus' %}
+                                                <img src="{% static 'images/asus_logo.jpg' %}" width="80" height="30">
+                                                {% elif data.brand == 'Apple' %}
+                                                <img src="{% static 'images/Apple_logo.jpg' %}" width="31" height="30">
+                                                {% elif data.brand == 'Dell' %}
+                                                <img src="{% static 'images/dell_logo.jpg' %}" width="80" height="40">
+                                                {% else %}
+                                                <img src="{% static 'images/hp_logo.jpg' %}" width="34" height="30">
+                                            {% endif %}
+
+                                        </td>
+                                        <td>
+                                            {{ data.warranty_summary }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="color: grey">
+                                            <b>Delivery </b>
+                                        </td>
+                                        <td>
+                                            <input type="text" placeholder="Pin Code" id="pin" name="pin"> <button type="submit" class="btn btn-primary" id="ck" onclick="check()"> Check</button>
+                                            <span id="dt"></span>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td colspan="2" >
+                                            <h2 class="hed">Specifications</h2>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td colspan="2">
+
+                                                <table align="center" border="0">
+                                    <tr>
+                                        <td colspan="2">
+                                            <h5 class="hed">General</h5>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Sales Package</h6>
+                                        </td>
+                                        <td>
+                                           {{ data.sales_package }}
+                                    </tr>
+                                        <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Model Number</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.model_no_id }}
+                                    </tr>
+                                        <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Series</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.series }}
+                                    </tr>
+                                        <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Color</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.color }}
+                                    </tr>
+                                        <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Type</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.type }}
+                                    </tr>
+                                        <tr>
+                                           <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Suitable For</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.suitable_for }}
+                                    </tr>
+                                        <tr>
+                                           <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Power Supply</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.power_supply}}
+                                    </tr>
+                                        <tr>
+                                              <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >MS Office Provided</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.msoffice_provided }}
+                                    </tr>
+                                        <tr>
+
+                                            <tr>
+                                        <td colspan="2">
+                                            <h5 class="hed">Processor And Memory Features</h5>
+                                        </td>
+                                    </tr>
+
+                                        <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Processor Brand</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.processor_brand }}
+                                    </tr>
+                                        <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Processor Name</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.processor_name }}
+                                    </tr>
+                                        <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Processor Generation</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.processor_genereation }}
+                                    </tr>
+                                        <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >SSD</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.ssd }}
+                                    </tr>
+                                                    <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >SSD Capacity</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.ssd_capacity }}
+                                    </tr>
+                                                    <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >RAM</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.ram }}
+                                    </tr>
+                                                    <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >RAM Type</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.ram_type }}
+                                    </tr>
+                                                    <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >HDD Capacity</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.hdd_capacity }}
+                                    </tr>
+                                                    <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Clock Speed </h6>
+                                        </td>
+                                        <td >
+                                           {{ data.clock_speed }}
+                                    </tr>
+                                                    <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >RAM Frequency</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.ram_frequency }}
+                                    </tr>
+                                                    <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Cache</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.cache }}
+                                    </tr>
+
+                                        <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Graphic Processor</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.graphic_processor }}
+                                    </tr>
+
+                                        <tr>
+                                        <td colspan="2">
+                                            <h5 class="hed">Operating System</h5>
+                                        </td>
+                                    </tr>
+                                                    <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >OS Architecture</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.os_architecture }}
+                                    </tr>
+
+                                        <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Operating System</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.operating_system }}
+                                    </tr>
+                                        <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >System Architecture</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.system_architecture }}
+                                    </tr>
+                                        <tr>
+                                        <td colspan="2">
+                                            <h5 class="hed">Port And Slot Features</h5>
+                                        </td>
+                                    </tr>
+                                        <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Mic In</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.mic_in }}
+                                    </tr>
+                                        <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >RJ45</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.rj45 }}
+                                    </tr>
+                                                    <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >USB Port</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.usb_port }}
+                                    </tr>
+                                                    <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >HDMI Port</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.hdmi_port }}
+                                    </tr>
+                                                    <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Multi Card Slot</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.multicard_slot }}
+                                    </tr>
+
+                                         <tr>
+                                        <td colspan="2">
+                                            <h5 class="hed">Display And Audio Features</h5>
+                                        </td>
+                                    </tr>
+                                        <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Touchscreen</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.touchscreen }}
+                                    </tr>
+                                        <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Screen Size</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.screen_size }}
+                                    </tr>
+                                        <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Screen Resolution</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.screen_resolution}}
+                                    </tr>
+                                        <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Screen Type</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.screen_type }}
+                                    </tr>
+                                        <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Speakers</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.speakers }}
+                                    </tr>
+                                        <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Internal Mic</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.internal_mic}}
+                                    </tr>
+
+                                        <tr>
+                                        <td colspan="2">
+                                            <h5 class="hed">Connectivity Features</h5>
+                                        </td>
+                                    </tr>
+                                        <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Wireless LAN</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.wireless_lan }}
+                                    </tr>
+                                         <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Bluetooth</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.bluetooth }}
+                                    </tr>
+                                         <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Ethernet</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.ethernet }}
+                                    </tr>
+
+                                                    <tr>
+                                        <td colspan="2">
+                                            <h5 class="hed"> Dimensions</h5>
+                                        </td>
+                                    </tr>
+                                        <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Dimensions</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.dimensions }}
+                                    </tr>
+
+                                        <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Weight</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.weight }}
+                                    </tr>
+
+                                        <tr>
+                                        <td colspan="2">
+                                            <h5 class="hed">Additional Features</h5>
+                                        </td>
+                                    </tr>
+                                        <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Disk Drive</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.disk_drive }}
+                                    </tr>
+                                        <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Web Camera</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.web_camera }}
+                                    </tr>
+                                        <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Keyboard</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.keyboard }}
+                                    </tr>
+                                        <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Pointer Device</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.pointer_device }}
+                                    </tr>
+                                        <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Included Software</h6>
+                                        </td>
+                                        <td >
+                                               {{ data.included_softwares }}
+                                    </tr>
+                                        <tr>
+                                        <td colspan="2">
+                                            <h5 class="hed"> Warranty</h5>
+                                        </td>
+                                    </tr>
+                                        <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Warranty Summary</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.warranty_summary }}
+                                    </tr>
+                                         <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Warranty Service Type</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.warranty_service_type }}
+                                    </tr>
+                                          <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Covered in Warranty</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.covered_in_warrenty }}
+                                    </tr>
+                                         <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Not Covered in Warranty</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.not_covered_in_warrenty }}
+                                    </tr>
+                                                    <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Domestic Warranty</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.domestic_warrenty }}
+                                    </tr>
+
+                                    </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h4 class="imge"> </h4>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                </div>
+
+            </td>
+        </tr>
+                </table>
+
+{% endblock %}
+

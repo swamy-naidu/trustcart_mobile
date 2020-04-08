@@ -1,0 +1,59 @@
+{% extends 'login_head.html' %}
+{% load static %}
+{% block lghead %}
+    <table align="center" border="0">
+
+        {% for x in data %}
+        <tr align="center">
+            <td width="1150">
+        <div class="card" style="width: 60rem;">
+  <div class="card-body">
+
+    <table align="center" border="0">
+        <tr>
+            <td width="350" rowspan="14" style="text-align: center">
+
+                     <a href="{% url 'view_one_tv' %}?modelno={{ x.model_no_id }}" >
+                <img src="{{ x.photo.url }}" width="240" height="140">
+                </a>
+
+            </td>
+        <td width="550" style="height: 10px">
+               <a href="{% url 'view_one_tv' %}?modelno={{ x.model_no_id }}" > <h5>{{ x.tittle }}</h5></a>
+         </td>
+
+    <td width="200" style="text-align: center" rowspan="14">
+                <h6 style="font-size: 30px">₹{{ x.price }}</h6>
+        Upto 10% off on SBI Card <br> Upto ₹2500 off on Exchange<br>No Cost EMI<br><br>  <br><br>  <br><br>
+           </td>
+
+        <tr>
+
+            <td>
+                <ul class="ult">
+                    <li class="lit"> Operating System: {{ x.os_present }}</li>
+                    <li class="lit">
+                        {{ x.HD_technology_Resolution }}
+                    </li>
+                    <li class="lit"> {{ x.speaker_output }} Speaker Output</li>
+                    <li class="lit"> {{ x.refresh_rate }} Refreshrate</li>
+                    <li class="lit"> {{ x.hdmi }} x HDMI | {{ x.usb }} x USB</li>
+                    <li class="lit"> {{ x.warranty_summary }}</li>
+
+                </ul>
+
+            </td>
+    </tr>
+
+        </tr>
+    </table>
+  </div>
+</div>
+                        </td>
+                    </tr>
+        {% endfor %}
+
+
+                </table>
+
+    {% endblock %}

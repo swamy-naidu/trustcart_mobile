@@ -1,0 +1,214 @@
+{% extends 'login_head.html' %}
+{% load static %}
+{% block lghead %}
+
+    <table align="center" border="0">
+               <table align="center" border="0">
+                   <tr align="center">
+                            <td>
+                        <div class="card" style="width: 60rem">
+                                <div class="card-body">
+                                    <table align="left" border="0">
+                    <tr>
+                        <td width="55">
+                        <button type="button" class="btn btn-light">1</button>
+                        </td>
+                        <td>
+                            <b style="color: grey;margin-top: 10px;margin-right: 14px;font-size: 17px"> LOGIN </b><img src="{% static 'images/correct.png' %}" width="14" height="14" style="margin-bottom: 3px">
+                        </td>
+
+                    </tr>
+                        <tr>
+                            <td>
+
+                            </td>
+                        <td>
+                            <h6 style="margin-top: 7px;margin-right: 10px">{{ user.name }} </h6>
+                        </td>
+                            <td>
+                                +91{{ user.mobile_no }}
+                            </td>
+                                    </table>
+                        </div>
+                            </div>
+                            </td>
+                   </tr>
+                   <tr>
+                            <td>
+                        <div class="card" style="width: 60rem">
+                                <div class="card-body">
+                                    <table align="left" border="0">
+                                    <tr>
+                                        <td width="55">
+                        <button type="button" class="btn btn-light">2</button>
+                        </td>
+                        <td>
+                            <h5 style="color: grey;margin-top: 10px;margin-right: 14px"> BILLING ADDRESS </h5>
+                        </td>
+                               <td colspan="4">
+                                    <img src="{% static 'images/correct.png' %}" width="14" height="14" style="margin-bottom: 3px">
+                                </td>
+                                    </tr>
+                                        <tr>
+                                            <td>
+
+                                            </td>
+                        <td colspan="3">
+                            <h6 style="margin-top: 4px">{{ xy.name }}</h6>
+                        </td>
+                          <td>
+                               {{ xy.address }}, {{ xy.locality }}, {{ xy.city }}, {{ xy.state }} -
+                        </td>
+                            <td>
+                            <h6 style="margin-top: 4px">{{ xy.pin }}</h6>
+                            </td>
+                        </tr>
+                        </table>
+
+                                </div>
+                        </div>
+            </td>
+        </tr>
+
+                   <tr>
+                       <td>
+                           <div class="card" style="width: 60rem">
+                                <div class="card-body">
+                                    <table align="left" border="0">
+                                    <tr>
+                                        <td width="55">
+                        <button type="button" class="btn btn-light">3</button>
+                        </td>
+                        <td colspan="2">
+                            <h5 style="color: grey;margin-top: 10px;margin-right: 14px"> ORDER SUMMARY </h5>
+                        </td>
+                                        <td>
+                                            <img src="{% static 'images/correct.png' %}" width="14" height="14" style="margin-bottom: 3px">
+                                        </td>
+                              </tr>
+                             <tr>
+                                   <td>
+
+                                   </td>
+                                      <td>
+                                           <h6>{{ data.qty }} Item's</h6>
+                                     </td>
+                                </tr>
+               </table>
+                                </div>
+                        </div>
+                       </td>
+                   </tr>
+                   <tr>
+                       <td>
+                           <div class="card" style="width: 60rem">
+                                <div class="card-body">
+                                    <table align="left" border="0">
+                                    <tr>
+                                        <td width="55">
+                        <button type="button" class="btn btn-light">4</button>
+                        </td>
+                        <td colspan="2">
+                            <h5 style="color: grey;margin-top: 10px;margin-right: 14px"> PAYMENT OPTIONS </h5>
+                        </td>
+                              </tr>
+                                    <tr>
+                                        <td>
+                                        </td>
+                                        <td colspan="2">
+                                            <h6>Saved Cards</h6>
+
+                                        </td>
+                                    </tr>
+                                <tr>
+                                    <td>
+                                        {% for x in data2 %}
+                        <tr>
+                        <td colspan="2">
+                        <div class="card" style="width: 57rem;">
+                                <div class="card-body">
+                                    <table align="left" border="0">
+                    <tr>
+                        <td width="700">
+                            {{ x.name_on_card }}
+                        </td>
+                        <td rowspan="3">
+                            <form action="{% url 'save_order' %}" method="post">
+                                    {% csrf_token %}
+                                  <input type="hidden" name="idno" value="{{ user.idno }}">
+                            <input type="hidden" name="name" value="{{ user.name }}">
+                            <input type="hidden" name="modelno" value="{{ data.modelno }}">
+                            <input type="hidden" name="ct" value="{{ data.ct }}">
+                            <input type="hidden" name="add_id" value="{{ xy.address_id }}">
+                            <input type="hidden" name="qty" value="{{ data.qty }}">
+                            <input type="hidden" name="total" value="{{ total }}">
+                             <button type="submit" class="btn btn-outline-primary">Confirm</button>
+                                  </form>
+                            </td>
+                    </tr>
+                        <tr>
+                        <td >
+                            <h6><img src="{% static 'images/visa.png'%}" width="50" height="50 " style="margin-right: 41px;margin-left: 14px"> {{ x.card_no }}</h6>
+                        </td>
+                        </tr>
+
+                                    </table>
+                        </div>
+                            </div>
+                            </td>
+                        </tr>
+
+                    {% endfor %}
+
+                     <tr>
+                        <td colspan="2">
+                        <div class="card" style="width: 57rem;">
+                                <div class="card-body">
+                                    <table align="left" border="0">
+                    <tr>
+                        <td width="700">
+                            {{ x.name_on_card }}
+                        </td>
+                        <td rowspan="3">
+                            <form action="{% url 'save_order' %}" method="post">
+                                    {% csrf_token %}
+                                  <input type="hidden" name="idno" value="{{ user.idno }}">
+                            <input type="hidden" name="name" value="{{ user.name }}">
+                            <input type="hidden" name="modelno" value="{{ data.modelno }}">
+                            <input type="hidden" name="ct" value="{{ data.ct }}">
+                            <input type="hidden" name="add_id" value="{{ xy.address_id }}">
+                            <input type="hidden" name="qty" value="{{ data.qty }}">
+                            <input type="hidden" name="total" value="{{ total }}">
+                            <input type="hidden" name="pr" value="{{ price }}">
+                             <button type="submit" class="btn btn-outline-primary">Confirm</button>
+                                  </form>
+                            </td>
+                    </tr>
+                        <tr>
+                        <td >
+                            <input type="radio" name="cash" value="cash" checked> Cash on Delivery
+                        </td>
+                        </tr>
+
+                                    </table>
+                        </div>
+                            </div>
+                            </td>
+                        </tr>
+
+               </table>
+                                </div>
+                        </div>
+                       </td>
+                   </tr>
+
+               </table>
+
+         <tr>
+            <td>
+                {% include 'footer.html' %}
+            </td>
+        </tr>
+    </table>
+
+{% endblock %}

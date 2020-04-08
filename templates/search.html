@@ -1,0 +1,100 @@
+{% extends 'head.html' %}
+{% load static %}
+{% block head %}
+    <table align="center" border="0">
+    {% if mes %}
+        <tr align="center" style="height: 200px">
+            <td>
+                <img src="{% static 'images/problem.png' %}" style="margin-top: 125px">
+            </td>
+        </tr>
+        <tr align="center" style="height: 200px">
+            <td>
+                <h6 style="margin-bottom: 125px">{{ mes }}</h6>
+            </td>
+        </tr>
+    {% else %}
+    {% if data %}
+        {% for x in data %}
+        <tr align="center">
+            <td width="1150">
+        <div class="card" style="width: 60rem;">
+  <div class="card-body">
+
+    <table align="center" border="0">
+        <tr>
+            <td width="250" rowspan="14" style="text-align: center">
+                {% if x.category == 'Mobiles' %}
+                     <a href="{% url 'view_one_mobile' %}?modelno={{ x.model_no }}" >
+                <img src="{{ x.photo.url }}" width="90" height="150">
+                </a>
+                {% elif x.category == 'Laptops' %}
+                     <a href="{% url 'view_one_laptop' %}?modelno={{ x.model_no }}" >
+                <img src="{{ x.photo.url }}" width="210" height="140">
+                </a>
+                    {% elif x.category == 'Cameras' %}
+                     <a href="{% url 'view_one_camera' %}?modelno={{ x.model_no }}" >
+                <img src="{{ x.photo.url }}" width="210" height="140">
+                </a>
+                {% else %}
+                     <a href="{% url 'view_one_tv' %}?modelno={{ x.model_no }}" >
+                <img src="{{ x.photo.url }}" width="210" height="140">
+                </a>
+                {% endif %}
+
+            </td>
+        <td width="550" style="height: 10px">
+            {% if x.category == 'Mobiles' %}
+                     <a href="{% url 'view_one_mobile' %}?modelno={{ x.model_no }}" > <h5>{{ x.name }}</h5></a>
+                {% elif x.category == 'Laptops' %}
+                     <a href="{% url 'view_one_laptop' %}?modelno={{ x.model_no }}" > <h5>{{ x.name }}</h5></a>
+                    {% elif x.category == 'Cameras' %}
+                     <a href="{% url 'view_one_camera' %}?modelno={{ x.model_no }}" > <h5>{{ x.name }}</h5></a>
+                {% else %}
+                     <a href="{% url 'view_one_tv' %}?modelno={{ x.model_no }}" > <h5>{{ x.name }}</h5></a>
+                {% endif %}
+         </td>
+        <tr>
+
+            <td>
+                {% if x.category == 'Mobiles' %}
+                     <a href="{% url 'view_one_mobile' %}?modelno={{ x.model_no }}" > <h6>
+                    Clickhere for Full Specifications
+                </h6></a>
+                {% elif x.category == 'Laptops' %}
+                     <a href="{% url 'view_one_laptop' %}?modelno={{ x.model_no }}" > <h6>
+                    Clickhere for Full Specifications
+                </h6></a>
+                    {% elif x.category == 'Cameras' %}
+                     <a href="{% url 'view_one_camera' %}?modelno={{ x.model_no }}" > <h6>
+                    Clickhere for Full Specifications
+                </h6></a>
+                {% else %}
+                     <a href="{% url 'view_one_tv' %}?modelno={{ x.model_no }}" > <h6>
+                    Clickhere for Full Specifications
+                </h6></a>
+                {% endif %}
+            </td>
+    </tr>
+    </table>
+  </div>
+</div>
+                        </td>
+                    </tr>
+        {% endfor %}
+    {% else %}
+        <tr align="center" style="height: 200px">
+            <td>
+                <img src="{% static 'images/problem.png' %}" style="margin-top: 125px">
+            </td>
+        </tr>
+        <tr align="center" style="height: 200px">
+            <td>
+                <h6 style="margin-bottom: 125px">Sorry we couldn't find any matches</h6>
+            </td>
+        </tr>
+    {% endif %}
+    {% endif %}
+                </table>
+
+    {% endblock %}

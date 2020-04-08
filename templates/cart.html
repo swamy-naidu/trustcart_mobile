@@ -1,0 +1,123 @@
+{% extends 'login_head.html' %}
+{% load static %}
+{% block lghead %}
+
+    <table align="center" border="0">
+
+        <tr align="center">
+            <td>
+               <table align="center" border="0">
+                   <tr>
+                            <td>
+                        <div class="card" style="width: 60rem">
+                                <div class="card-body">
+                                <table border="0">
+                                <tr>
+                                    <h4>My Cart ({{ count }})</h4>
+                                </tr>
+                                <tr>
+                                    <td>
+
+                                    {% for x in data %}
+                                        <div class="card" style="width: 57rem;margin-left: 14px">
+                                <div class="card-body">
+                                    <table align="left" border="0">
+
+                                    <tr style="height: 200px">
+                                        <td>
+                                        <table border="0">
+                                            <tr>
+                                                <td width="220" rowspan="3">
+                                                    {% if x.category == 'Mobiles' %}
+                                            <a href="{% url 'view_one_mobile' %}?modelno={{ x.model_no_id }}" >
+                                                 <img src="{{ x.photo.url }}" height="140" width="100" style="margin-left: 50px">
+                                            </a>
+                                                 {% elif x.category == 'Laptops' %}
+                                                 <a href="{% url 'view_one_laptop' %}?modelno={{ x.model_no_id }}" >
+                                                <img src="{{ x.photo.url }}" height="140" width="200">
+                                                 </a>
+                                                        {% elif x.category == 'Cameras' %}
+                                                        <a href="{% url 'view_one_camera' %}?modelno={{ x.model_no_id }}" >
+                                                <img src="{{ x.photo.url }}" height="140" width="200">
+                                                        </a>
+                                                        {% else %}
+                                                        <a href="{% url 'view_one_tv' %}?modelno={{ x.model_no_id }}" >
+                                                <img src="{{ x.photo.url }}" height="120" width="180">
+                                                        </a>
+                                            {% endif %}
+                                                </td>
+                                            <td width="780">
+                                                {% if x.category == 'Mobiles' %}
+                                            <a href="{% url 'view_one_mobile' %}?modelno={{ x.model_no_id }}" >
+                                                <h6 style="color: grey">{{ x.tittle }}</h6>
+                                            </a>
+                                                 {% elif x.category == 'Laptops' %}
+                                                 <a href="{% url 'view_one_laptop' %}?modelno={{ x.model_no_id }}" >
+                                                <h6 style="color: grey">{{ x.tittle }}</h6>
+                                                 </a>
+                                                        {% elif x.category == 'Cameras' %}
+                                                        <a href="{% url 'view_one_camera' %}?modelno={{ x.model_no_id }}" >
+                                                <h6 style="color: grey">{{ x.tittle }}</h6>
+                                                        </a>
+                                                        {% else %}
+                                                        <a href="{% url 'view_one_tv' %}?modelno={{ x.model_no_id }}" >
+                                                <h6 style="color: grey">{{ x.tittle }}</h6>
+                                                        </a>
+                                            {% endif %}
+
+                                            </td>
+                                            <td rowspan="3" width="300">
+                                                <form action="{% url 'Save' %}" method="post">
+                                                    {% csrf_token %}
+                                                <input type="hidden" name="idno" value="{{ user.idno }}">
+                                                <input type="hidden" name="name" value="{{ user.name }}">
+                                                <input type="hidden" name="modelno" value="{{ x.model_no_id }}">
+                                                <input type="hidden" name="category" value="{{ x.category }}">
+                                           <button type="submit" class="btn btn-warning" style="width: 200px;margin-left: 50px"> PLACE ORDER</button>
+                                                    </form>
+                                            </td>
+                                            </tr>
+                                        <tr>
+                                            <td>
+                                                <h6> ₹ {{ x.price }}</h6>
+                                            </td>
+                                        </tr>
+                                        <tr align="center">
+                                            <td>
+                                                <a href="{% url 'remove_cart' %}?idno={{ user.idno }}&modelno={{ x.model_no_id }}&ct={{ x.category }}"> <h5>REMOVE</h5> </a>
+                                            </td>
+                                        </tr>
+                                        </table>
+                                        </td>
+                                    </tr>
+
+                   </table>
+                                </div>
+                                        </div>
+                                    {% endfor %}
+
+                                    </td>
+                                </tr>
+                                <tr align="right">
+                                    <td>
+                                        <h5>Total Amount  : ₹{{ total }}</h5>
+                                    </td>
+                                </tr>
+                                </table>
+                        </div>
+                            </div>
+                            </td>
+                   </tr>
+               </table>
+            </td>
+        </tr>
+
+         <tr>
+            <td>
+                {% include 'footer.html' %}
+            </td>
+        </tr>
+    </table>
+
+
+{% endblock %}

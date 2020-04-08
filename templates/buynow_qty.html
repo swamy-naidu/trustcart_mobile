@@ -1,0 +1,122 @@
+{% extends 'login_head.html' %}
+{% load static %}
+{% block lghead %}
+            <form action="{% url 'order_summary' %}" method="post">
+            {% csrf_token %}
+               <table align="center" border="0">
+                   <tr>
+                            <td>
+                        <div class="card" style="width: 60rem">
+                                <div class="card-body">
+                                    <table align="left" border="0">
+                    <tr>
+                        <td width="55">
+                        <button type="button" class="btn btn-light">1</button>
+                        </td>
+                        <td>
+                            <b style="color: grey;margin-top: 10px;margin-right: 14px;font-size: 17px"> LOGIN </b><img src="{% static 'images/correct.png' %}" width="14" height="14" style="margin-bottom: 3px">
+                        </td>
+                       
+                    </tr>
+                        <tr>
+                            <td>
+
+                            </td>
+                        <td>
+                            <h6 style="margin-top: 7px;margin-right: 10px">{{ user.name }} </h6>
+                        </td>
+                            <td>
+                                +91{{ user.mobile_no }}
+                            </td>
+                                    </table>
+                        </div>
+                            </div>
+                            </td>
+                   </tr>
+                   <tr>
+                            <td>
+                        <div class="card" style="width: 60rem">
+                                <div class="card-body">
+                                    <table align="left" border="0">
+                                    <tr>
+                                        <td width="55">
+                        <button type="button" class="btn btn-light">2</button>
+                        </td>
+                        <td>
+                            <h5 style="color: grey;margin-top: 10px;margin-right: 14px"> BILLING ADDRESS </h5>
+                        </td>
+                               <td colspan="4">
+                                    <img src="{% static 'images/correct.png' %}" width="14" height="14" style="margin-bottom: 3px">
+                                </td>
+                                    </tr>
+                                        <tr>
+                                            <td>
+
+                                            </td>
+                        <td colspan="3">
+                            <h6 style="margin-top: 4px">{{ x.name }}</h6>
+                        </td>
+                          <td>
+                               {{ x.address }}, {{ x.locality }}, {{ x.city }}, {{ x.state }} -
+                        </td>
+                            <td>
+                            <h6 style="margin-top: 4px">{{ x.pin }}</h6>
+                            </td>
+                        </tr>
+                        </table>
+
+                                </div>
+                        </div>
+            </td>
+        </tr>
+
+                   <tr>
+                       <td>
+                           <div class="card" style="width: 60rem;height: 400px">
+                                <div class="card-body">
+                                    <table align="left" border="0">
+                                    <tr>
+                                        <td width="55" height="100">
+                        <button type="button" class="btn btn-light">3</button>
+                        </td>
+                        <td colspan="2">
+                            <h5 style="color: grey;margin-top: 10px;margin-right: 14px"> QUANTITY </h5>
+                        </td>
+                              </tr>
+                          <tr>
+                              <td>
+
+                              </td>
+                                <td colspan="2">
+                                    Quantity :
+                                      <select name="qty">
+                                          <option>1</option>
+                                          <option>2</option>
+                                          <option>3</option>
+                                          <option>4</option>
+                                          <option>5</option>
+                                      </select>
+                                    <b style="margin-left: 100px"> *Available Item's : {{ qty }}</b>
+                                </td>
+
+                            </tr>
+                                  <tr>
+                                        <td width="900" colspan="3">
+                             <input type="hidden" name="idno" value="{{ user.idno }}">
+                            <input type="hidden" name="name" value="{{ user.name }}">
+                            <input type="hidden" name="modelno" value="{{ data.modelno }}">
+                            <input type="hidden" name="ct" value="{{ data.ct }}">
+                            <input type="hidden" name="add_id" value="{{ x.address_id }}">
+                            <button type="submit" class="btn btn-outline-primary" style="margin-left: 500px;margin-top: 100px">Select</button>
+                                        </td>
+                                  </tr>
+               </table>
+                         </div>
+                     </div>
+                       </td>
+                   </tr>
+
+               </table>
+            </form>
+
+{% endblock %}

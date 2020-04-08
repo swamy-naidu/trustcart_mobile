@@ -1,0 +1,85 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/hover_dropdown.css' %}">
+
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="height: 30px;margin-bottom: 5px">
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+
+
+
+
+      <li class="nav-item dropdown" style="margin-left: 280px;margin-right: 50px;font-size: 14px">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Mobiles
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="{% url 'view_all_mobiles' %}?brand=Apple">Apple</a>
+          <a class="dropdown-item" href="{% url 'view_all_mobiles' %}?brand=MI">MI</a>
+          <a class="dropdown-item" href="{% url 'view_all_mobiles' %}?brand=OnePlus">One Plus</a>
+            <a class="dropdown-item" href="{% url 'view_all_mobiles' %}?brand=Samsung">Samsung</a>
+        </div>
+      </li>
+
+
+        <li class="nav-item dropdown" style="margin-left: 50px;margin-right: 50px;font-size: 14px">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Laptops
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="{% url 'view_all_laptops' %}?brand=Apple">Apple</a>
+          <a class="dropdown-item" href="{% url 'view_all_laptops' %}?brand=Asus">Asus</a>
+          <a class="dropdown-item" href="{% url 'view_all_laptops' %}?brand=Dell">Dell</a>
+            <a class="dropdown-item" href="{% url 'view_all_laptops' %}?brand=HP">HP</a>
+        </div>
+      </li>
+
+
+        <li class="nav-item dropdown" style="margin-left: 50px;margin-right: 50px;font-size: 14px">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Cameras
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="{% url 'view_all_cameras' %}?brand=Canon">Canon</a>
+          <a class="dropdown-item" href="{% url 'view_all_cameras' %}?brand=Nikon">Nikon</a>
+            <a class="dropdown-item" href="{% url 'view_all_cameras' %}?brand=Sony">Sony</a>
+        </div>
+      </li>
+
+
+        <li class="nav-item dropdown" style="margin-left: 50px;margin-right: 50px;font-size: 14px">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Telivisions
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="{% url 'view_all_tvs' %}?brand=VU">VU</a>
+          <a class="dropdown-item" href="{% url 'view_all_tvs' %}?brand=MI">MI</a>
+          <a class="dropdown-item" href="{% url 'view_all_tvs' %}?brand=Motorola">Motorola</a>
+          <a class="dropdown-item" href="{% url 'view_all_tvs' %}?brand=Samsung">Samsung</a>
+            <a class="dropdown-item" href="{% url 'view_all_tvs' %}?brand=Sony">Sony</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  </body>
+</html>
+

@@ -1,0 +1,86 @@
+{% extends 'head.html' %}
+{% load static %}
+{% block head %}
+    <table align="center" border="0">
+    <tr>
+        <th>
+<div class="register-box">
+  <div class="register-logo">
+    <a href="{% url 'index' %}"><b>Trust</b>Cart</a>
+  </div>
+
+  <div class="card">
+    <div class="card-body register-card-body">
+      <p class="login-box-msg">Register a new membership</p>
+
+      <form action="{% url 'register' %}" method="post">
+          {% csrf_token %}
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Full name" name="name">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-user"></span>
+            </div>
+          </div>
+        </div>
+          <p style="font-family: Roboto">Gender</p>
+          <input type="radio" name="gender" value="male" checked> Male
+          <input type="radio" name="gender" value="female"> Female
+
+        <br><br><div class="input-group mb-3">
+          <input type="email" class="form-control" placeholder="Email" name="email">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div>
+        </div>
+          <div class="input-group mb-3">
+          <input type="tel" class="form-control" placeholder="Mobile No" name="mobile">
+          <div class="input-group-append">
+            <div class="input-group-text">
+             <img src="{% static 'images/mobile_no.png' %}">
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="password" class="form-control" placeholder="Password" name="password">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <!-- /.col -->
+          <div class="col-4">
+            <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+          </div>
+          <!-- /.col -->
+            </div>
+      </form>
+        </div>
+
+
+      <a href="{% url 'login' %}" class="text-center">I already have a membership</a>
+    </div>
+    <!-- /.form-box -->
+  </div><!-- /.card -->
+
+        </th>
+    </tr>
+    {% for x in messages %}
+           <tr>
+                 <td>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong></strong> {{ x }}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+        </td>
+           </tr>
+        {% endfor %}
+
+</table>
+{% endblock %}

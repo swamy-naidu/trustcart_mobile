@@ -1,0 +1,497 @@
+{% extends 'head.html' %}
+{% load static %}
+{% block head %}
+      <script type="text/javascript">
+          function check() {
+              var p = document.getElementById("pin").value;
+              var request = new XMLHttpRequest();
+    request.open("GET","http://127.0.0.1:8000/pin?pin="+p,true);
+    request.onreadystatechange = innerfun;
+    request.send();
+
+    function innerfun()
+    {
+        if(request.status == 200 && request.readyState == 4)
+        {
+            var x = request.responseText;
+            var data = JSON.parse(x); // converting text(str) to json
+
+            if(data.message != "")
+            {
+               document.getElementById("dt").innerText = data.message;
+            }
+        }
+    }
+          }
+      </script>
+
+    <table align="center" border="0">
+
+
+        <tr align="center">
+            <td>
+
+                <div class="card" style="width: 60rem;">
+                <div class="card-body">
+                    <table align="center" border="0">
+                        <tr>
+                            <td width="550" style="text-align: center" >
+                                <img src="{{ data.photo.url }}" ><br><br>
+                                <form action="{% url 'login' %}">
+                                    {% csrf_token %}
+                                <button type="submit" class="btns btn1" name="b1" value="add_to_cart" disabled>ADD TO CART</button>
+                                <button type="submit" class="btns btn3" name="b1" value="buy_now" disabled>BUY NOW</button>
+                                </form>
+                                Please Login To Buy This Item
+                            </td>
+                            <td width="750" rowspan="4">
+                                <table align="center" border="0">
+                                    <tr>
+                                        <td colspan="2" width="800" style="height: 90px;">
+                                            <h3>{{ data.tittle }}</h3>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="110">
+                                            <h4>₹{{ data.price }}</h4>
+                                        </td>
+                                        <td><a href="#"> <img src="{% static 'images/info.png' %}" style="margin-bottom: 5px"> </a> </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td colspan="2">
+                                            <h6> Available Offers</h6>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td colspan="2">
+                                            <img src="{% static 'images/offer.png' %}" width="18" height="18">  <b>Bank Offer </b> 5% Unlimited Cashback on Flipkart Axis Bank Credit Card <a href="{% url 'terms_conditions' %}"> <b>T&C</b> </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <img src="{% static 'images/offer.png' %}" width="18" height="18">  <b>Bank Offer </b> Flat ₹50/- Cashback as Flipkart gift voucher for first-time RuPay Debit Card Transactions <a href="{% url 'terms_conditions' %}"> <b>T&C</b> </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <img src="{% static 'images/offer.png' %}" width="18" height="18">  <b>Bank Offer </b> Extra 5% off* with Axis Bank Buzz Credit Card <a href="{% url 'terms_conditions' %}"> <b>T&C</b></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <img src="{% static 'images/offer.png' %}" width="18" height="18">  <b>Bank Offer </b> ₹6000 off on Prepaid Transactions with HDFC Credit and Debit Cards <a href="{% url 'terms_conditions' %}"> <b>T&C</b></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <a href="#"> <b>View more offers</b> </a>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td style="text-align: center;height: 50px">
+                                            {% if data.brand == 'OnePlus' %}
+                                                <img src="{% static 'images/oneplus_logo.jpg' %}" width="80" height="40">
+                                                {% elif data.brand == 'Apple' %}
+                                                <img src="{% static 'images/Apple_logo.jpg' %}" width="30" height="30">
+                                                {% elif data.brand == 'MI' %}
+                                                <img src="{% static 'images/mi_logo.png' %}" width="25" height="25">
+                                                {% elif data.brand == 'Samsung' %}
+                                                <img src="{% static 'images/samsung_logo.jpg' %}" width="65" height="18">
+                                                {% else %}
+                                                <img src="{% static 'images/oneplus_logo.jpg' %}" width="60" height="30">
+                                            {% endif %}
+
+                                        </td>
+                                        <td>
+                                            {{ data.warrenty }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="color: grey">
+                                            <b>Delivery </b>
+                                        </td>
+                                        <td>
+                                            <input type="text" placeholder="Pin Code" id="pin" name="pin"> <button type="submit" class="btn btn-primary" id="ck" onclick="check()"> Check</button>
+                                            <span id="dt"></span>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td colspan="2" >
+                                            <h2 class="hed">Specifications</h2>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td colspan="2">
+
+                                                <table align="center" border="0">
+                                    <tr>
+                                        <td colspan="2">
+                                            <h5 class="hed">General</h5>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >In The Box</h6>
+                                        </td>
+                                        <td>
+                                           {{ data.in_the_box }}
+                                    </tr>
+                                        <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Model Number</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.model_no_id }}
+                                    </tr>
+                                        <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Model Name</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.model_name }}
+                                    </tr>
+                                        <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Color</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.color }}
+                                    </tr>
+                                        <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Sim Type</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.sim_type }}
+                                    </tr>
+                                        <tr>
+
+                                            <tr>
+                                        <td colspan="2">
+                                            <h5 class="hed">Display Features</h5>
+                                        </td>
+                                    </tr>
+
+                                        <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Display Size</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.display_size }}
+                                    </tr>
+                                        <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Resolution</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.resolution }}
+                                    </tr>
+                                        <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Resolution Type</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.resolution_type }}
+                                    </tr>
+                                        <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >GPU</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.gpu }}
+                                    </tr>
+                                        <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Other Display Features</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.other_display_features }}
+                                    </tr>
+
+                                        <tr>
+                                        <td colspan="2">
+                                            <h5 class="hed">Os & Processor Features</h5>
+                                        </td>
+                                    </tr>
+
+                                        <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Operating System</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.os }}
+                                    </tr>
+                                        <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Processor Type</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.processor_type }}
+                                    </tr>
+                                        <tr>
+                                        <td colspan="2">
+                                            <h5 class="hed">Memory & Storage Features</h5>
+                                        </td>
+                                    </tr>
+                                        <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Internal Storage</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.internal_storage }}
+                                    </tr>
+                                        <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >RAM</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.ram }}
+                                    </tr>
+
+                                         <tr>
+                                        <td colspan="2">
+                                            <h5 class="hed">Camera Features</h5>
+                                        </td>
+                                    </tr>
+                                        <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Primary Camera Available</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.primary_camera_Available }}
+                                    </tr>
+                                        <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Primary Camera </h6>
+                                        </td>
+                                        <td >
+                                           {{ data.primary_camera }}
+                                    </tr>
+                                        <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Primary Camera Features</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.primary_camera_features }}
+                                    </tr>
+                                        <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Secondary Camera Available</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.secondary_camera_available }}
+                                    </tr>
+                                        <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Secondary Camera</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.secondary_camera }}
+                                    </tr>
+                                        <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Secondary Camera Features</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.secondary_camera_features }}
+                                    </tr>
+                                        <tr>
+                                        <td colspan="2">
+                                            <h5 class="hed">Connectivity Features</h5>
+                                        </td>
+                                    </tr>
+                                        <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Network Type</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.network_type }}
+                                    </tr>
+                                         <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Supported Networks</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.supported_networks }}
+                                    </tr>
+                                         <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Supported Networks</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.supported_networks }}
+                                    </tr>
+                                         <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Internet Connectivity</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.interenet_connectivity }}
+                                    </tr>
+                                         <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Bluetooth Support</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.buetooth_support }}
+                                    </tr>
+                                         <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Bluetooth Version</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.buetooth_version }}
+                                    </tr>
+                                         <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >WiFi</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.wifi }}
+                                    </tr>
+                                         <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >WiFi Version</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.wifi_version }}
+                                    </tr>
+                                         <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >WiFi Hotspot</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.wifi_hotspot }}
+                                    </tr>
+                                        <tr>
+                                        <td colspan="2">
+                                            <h5 class="hed">Other Details</h5>
+                                        </td>
+                                    </tr>
+                                        <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >USB Connectivity</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.usb_connectivity }}
+                                    </tr>
+                                        <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Audio Jack</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.audio_jack }}
+                                    </tr>
+                                        <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >GPS Support</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.gps_support }}
+                                    </tr>
+                                        <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Removable Battery</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.removable_battery }}
+                                    </tr>
+                                        <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Sensors</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.sensors }}
+                                    </tr>
+                                        <tr>
+                                        <td colspan="2">
+                                            <h5 class="hed"> Battery & Power Features</h5>
+                                        </td>
+                                    </tr>
+                                        <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Battery Capacity</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.battery_capacity }}
+                                    </tr>
+                                        <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Battery Type</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.battery_type }}
+                                    </tr>
+                                        <tr>
+                                        <td colspan="2">
+                                            <h5 class="hed"> Dimensions</h5>
+                                        </td>
+                                    </tr>
+                                        <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Width</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.width }}
+                                    </tr>
+                                        <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Height</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.height }}
+                                    </tr>
+                                        <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Depth</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.depth }}
+                                    </tr>
+                                        <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Weight</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.weight }}
+                                    </tr>
+                                        <tr>
+                                        <td colspan="2">
+                                            <h5 class="hed"> Warranty</h5>
+                                        </td>
+                                    </tr>
+                                        <tr>
+                                        <td width="240">
+                                            <h6 class="gr" >Warranty</h6>
+                                        </td>
+                                        <td >
+                                           {{ data.warrenty }}
+                                    </tr>
+
+                                    </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h4 class="imge"> </h4>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                </div>
+
+            </td>
+        </tr>
+                </table>
+
+{% endblock %}
+

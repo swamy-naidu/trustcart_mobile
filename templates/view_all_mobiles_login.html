@@ -1,0 +1,66 @@
+{% extends 'login_head.html' %}
+{% load static %}
+{% block lghead %}
+    <table align="center" border="0">
+
+        {% for x in data %}
+        <tr align="center">
+            <td width="1150">
+        <div class="card" style="width: 60rem;">
+  <div class="card-body">
+
+    <table align="center" border="0">
+        <tr>
+            <td width="250" rowspan="14" style="text-align: center">
+                {% if x.brand == 'Apple' %}
+                     <a href="{% url 'view_one_mobile' %}?modelno={{ x.model_no_id }}" >
+                <img src="{{ x.photo.url }}" width="150" height="210">
+                </a>
+                {% elif x.brand == 'Samsung' %}
+                     <a href="{% url 'view_one_mobile' %}?modelno={{ x.model_no_id }}" >
+                <img src="{{ x.photo.url }}" width="130" height="210">
+                </a>
+                {% else %}
+                     <a href="{% url 'view_one_mobile' %}?modelno={{ x.model_no_id }}" >
+                <img src="{{ x.photo.url }}" width="110" height="210">
+                </a>
+                {% endif %}
+
+            </td>
+        <td width="550" style="height: 10px">
+               <a href="{% url 'view_one_mobile' %}?modelno={{ x.model_no_id }}" > <h5>{{ x.tittle }}</h5></a>
+         </td>
+
+    <td width="200" style="text-align: center" rowspan="14">
+                <h6 style="font-size: 30px">₹{{ x.price }}</h6>
+        Upto 10% off on SBI Card <br> Upto ₹2500 off on Exchange<br>No Cost EMI<br><br>  <br><br>  <br><br>
+           </td>
+
+        <tr>
+
+            <td>
+                <ul class="ult">
+                    <li class="lit"> {{ x.ram }} RAM | {{x.internal_storage }} ROM | Expandable Upto {% if x.expandable_storage == 'No' %} -- {% elif x.expandable_storage == 'n/a' %} -- {% else %} {{ x.expandable_storage }} {% endif %}</li>
+                    <li class="lit">
+                        {{ x.display_size }} {{ x.resolution_type }} Display
+                    </li>
+                    <li class="lit"> {{ x.primary_camera }} | {{ x.secondary_camera }}</li>
+                    <li class="lit"> {{ x.battery_capacity }} | {{ x.battery_type }} Battery</li>
+                    <li class="lit"> {{ x.processor_type }}</li>
+                    <li class="lit"> {{ x.warrenty }}</li>
+
+                </ul>
+
+            </td>
+    </tr>
+
+        </tr>
+    </table>
+  </div>
+</div>
+                        </td>
+                    </tr>
+        {% endfor %}
+                </table>
+
+    {% endblock %}
